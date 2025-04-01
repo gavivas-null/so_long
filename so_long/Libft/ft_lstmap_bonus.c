@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/01 22:11:52 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:52:30 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:55:40 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "libft.h"
 
-int	main(void)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		w;
-	int		h;
+	t_list	*aux;
+	t_list	*final;
+	void	*fcontent;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 256, 256, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./textures/salida1.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	final = 0;
+	while (lst)
+	{
+		fcontent = f(lst->content);
+		aux = ft_lstnew(fcontent);
+		if (!aux)
+		{
+			del(fcontent);
+			ft_lstclear(&aux, del);
+		}
+		ft_lstadd_back(&final, aux);
+		lst = lst->next;
+	}
+	return (final);
 }

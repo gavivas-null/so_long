@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/01 22:11:52 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:53:53 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:56:40 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "libft.h"
 
+size_t	ft_strlen(const char *s)
+{
+	int	a;
+
+	a = 0;
+	while (s[a] != '\0')
+	{
+		a++;
+	}
+	return (a);
+}
+/*
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		w;
-	int		h;
+	char	*len;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 256, 256, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./textures/salida1.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
+	len = "Muy buenas a todos Guapisimos";
+
+	printf("%zu \n", ft_strlen(len));
+	printf("%zu", strlen(len));
 	return (0);
-}
+}*/

@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/01 22:11:52 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:53:11 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:56:10 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		w;
-	int		h;
-
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 256, 256, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./textures/salida1.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+	}
+	else
+	{
+		if (n < 0)
+		{
+			write (fd, "-", 1);
+			n = n * -1;
+		}
+		if (n > 9)
+		{
+			ft_putnbr_fd(n / 10, fd);
+			n = n % 10;
+		}
+		if (n < 10)
+			ft_putchar_fd(n + 48, fd);
+	}
 }

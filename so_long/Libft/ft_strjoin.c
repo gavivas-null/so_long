@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/01 22:11:52 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:53:36 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:56:31 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "libft.h"
 
-int	main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		w;
-	int		h;
+	char	*newstr;
+	size_t	len;
+	size_t	slen;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 256, 256, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./textures/salida1.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	len = ft_strlen(s1);
+	slen = ft_strlen(s2);
+	newstr = malloc(sizeof(char) * (len + slen + 1));
+	if (newstr == NULL)
+		return (NULL);
+	ft_memcpy(newstr, s1, len);
+	ft_memcpy(newstr + len, s2, slen + 1);
+	return (newstr);
 }

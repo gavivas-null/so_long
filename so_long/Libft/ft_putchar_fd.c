@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/01 22:11:52 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:52:56 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:56:06 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "libft.h"
 
-int	main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		w;
-	int		h;
-
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 256, 256, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./textures/salida1.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
-	mlx_loop(mlx);
-	return (0);
+	write(fd, &c, 1);
 }

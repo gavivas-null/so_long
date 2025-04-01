@@ -6,4 +6,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define TILE 
+# define TILE 0
+
+#endif
