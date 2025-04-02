@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_main_read_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/02 22:53:39 by gavivas-         ###   ########.fr       */
+/*   Created: 2025/04/02 20:10:40 by gavivas-          #+#    #+#             */
+/*   Updated: 2025/04/02 21:31:49 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "include/so_long.h"
 
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
 	char	**map;
-	char	*grass;
-	int		w;
-	int		h;
-	int		width;
-	int		height;
-	
+	int		i;
 
-	mlx = mlx_init();
 	map = ft_read_map("maps/valids/map1.ber");
-	ft_get_map_size(map, &width, &height);
-	win = mlx_new_window(mlx, width * TILE, height * TILE, "so_long");
-	grass = mlx_xpm_file_to_image(mlx, "textures/tileset.xpm", &w, &h);
-	ft_draw_floor(map, mlx, win, grass);
-	mlx_loop(mlx);
+	if (!map)
+		return (1);
+	i = 0;
+	while (map[i])
+	{
+		ft_printf("%s", map[i]);
+		i++;
+	}
 	return (0);
 }
