@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:31:51 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/09 19:58:45 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:11:12 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int	ft_check_rectangular(char **map)
 	}
 	return (1);
 }
+
 
 int	ft_validate_map(char **map) //funcion principal para validar.
 {
