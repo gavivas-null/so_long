@@ -20,6 +20,8 @@ char	**ft_read_map(char *map);
 void	ft_get_map_size(char **map, int *width, int *height);
 int		ft_check_valid_chars(char **map);
 int		ft_check_walls(char **map) ;
+int	    ft_check_required_elements(char **map);
+int	ft_check_rectangular(char **map);
 int		ft_validate_map(char **map);
 void	ft_load_textures(void *mlx, t_textures *tx);
 void	ft_draw_all_textures(char **map, void *mlx, void *win, t_textures *tx);
