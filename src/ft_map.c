@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:41:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/10 20:24:13 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:56:23 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**ft_read_map(char *filename) //lee el mapa
 {
 	t_list	*map_list = NULL;
 	t_list	*node;
-    int		fd;
+	int		fd;
 	char	*line;
 	char	**map;
 
