@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/09 20:46:35 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:56:36 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(void)
 	t_textures	tx;
 
 	mlx = mlx_init();
-	map = ft_read_map("maps/valids/map2.ber");
+	map = ft_read_map("maps/invalids/invalid_map14.ber");
 	ft_get_map_size(map, &width, &height);
 	if (!ft_validate_map(map))
 		return (free(map), 1);

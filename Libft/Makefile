@@ -50,7 +50,9 @@ ft_putchar.c \
 SRCGNL		=	get_next_line.c \
 get_next_line_utils.c \
 
-SRCALL	=	$(SRC) $(SRCBONUS) $(SRCPRINTF) $(SRCGNL)
+SRCETC		= 	ft_free_split.c \
+
+SRCALL	=	$(SRC) $(SRCBONUS) $(SRCPRINTF) $(SRCGNL) $(SRCETC)
 OBJ	=	$(SRCALL:.c=.o)
 CC	 =	cc
 AR = ar

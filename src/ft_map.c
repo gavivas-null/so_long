@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_map_size.c                                  :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:41:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/03 20:19:00 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:24:13 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@ void	ft_get_map_size(char **map, int *width, int *height) //obtener el tamaño d
 {
 	if (!map || !map[0])
 	{
-		*width = 0;
-		*height = 0;
+		if (width)
+			*width = 0;
+		if (height)
+			*height = 0;
 		return ;
 	}
-	*height = 0; //comienza con la altura en 0.
-	*width = ft_strlen(map[0]); //calcula el numero de columnas.
-	while (map[*height]) // cuenta las filas.
-		(*height)++; //recorre el mapa contando las filas hasta llegar a NULL.
+	if (width)
+		*width = ft_strlen(map[0]);
+	if (height)
+	{
+		*height = 0;
+		while (map[*height])
+			(*height)++;
+	}
 }
 
 char	**ft_lst_2_array(t_list *list) //convierte una lista en un doble array.
