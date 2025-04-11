@@ -6,30 +6,24 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:41:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/10 20:56:23 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/11 21:12:05 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	ft_get_map_size(char **map, int *width, int *height) //obtener el tamaño del mapa.
+void	ft_get_map_size(t_game *game) //obtener el tamaño del mapa.
 {
-	if (!map || !map[0])
+	if (!game->map)
 	{
-		if (width)
-			*width = 0;
-		if (height)
-			*height = 0;
-		return ;
+		game->width = 0;
+		game->height = 0;
+		return;
 	}
-	if (width)
-		*width = ft_strlen(map[0]);
-	if (height)
-	{
-		*height = 0;
-		while (map[*height])
-			(*height)++;
-	}
+	game->width = ft_strlen(game->map[0]);
+	game->height = 0;
+	while (game->map[game->height])
+		game->height++;
 }
 
 char	**ft_lst_2_array(t_list *list) //convierte una lista en un doble array.
@@ -40,6 +34,8 @@ char	**ft_lst_2_array(t_list *list) //convierte una lista en un doble array.
 
 	size = ft_lstsize(list); //tamaño de la lista
 	array = ft_calloc(sizeof(char *), size + 1); //crea un array para almacenar cada contenido de la lista.
+	if (!array)
+		return (NULL);
 	i = 0;
 	while (list) //si la lista existe
 	{
@@ -58,13 +54,15 @@ char	**ft_read_map(char *filename) //lee el mapa
 	char	*line;
 	char	**map;
 
+	if (!filename)
+		return (ft_printf("Error\nNombre del archivo nulo.\n"), NULL);
 	fd = open(filename, O_RDONLY); //abre el mapa .ber
 	if (fd == -1) //si da error retorna error y null.
-		return(ft_printf("error"), NULL);
+		return(ft_printf("Error\nNo se pudo abrir el archivo.\n"), NULL);
 	line = get_next_line(fd); //lee la primera linea usando gnl.
 	while (line)
 	{
-		if (line[ft_strlen(line) - 1] == '\n')
+		if (line && ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		node = ft_lstnew(line); //guarda la linea en un nodo.
 		ft_lstadd_back(&map_list, node); //añade el nodo a una lista (en el primer llamado se crea la lista) al final.

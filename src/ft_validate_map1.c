@@ -6,26 +6,26 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:31:51 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/10 20:41:27 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:09:04 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	ft_check_valid_chars(char **map) //chequea caracteres validos.
+int	ft_check_valid_chars(t_game *game) //chequea caracteres validos.
 {
 	int	x; //cada columna del mapa.
 	int	y; //cada fila del mapa.
 
 	y = 0;
-	while (map[y])
+	while (game->map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (game->map[y][x])
 		{
-			if (map[y][x] != '1' && map[y][x] != '0' && map[y][x] != 'P' && map[y][x] != 'C' && map[y][x] != 'E') 
+			if (game->map[y][x] != '1' && game->map[y][x] != '0' && game->map[y][x] != 'P' && game->map[y][x] != 'C' && game->map[y][x] != 'E') 
 			{
-				ft_printf("Error\nCarácter inválido '%c' en el mapa.\n", map[y][x]);
+				ft_printf("Error\nCarácter inválido '%c' en el mapa.\n", game->map[y][x]);
 				return (0);
 			}
 			x++; //cambia de columna.	
@@ -35,23 +35,21 @@ int	ft_check_valid_chars(char **map) //chequea caracteres validos.
 	return (1);
 }
 
-int	ft_check_walls(char **map) // chequea que los bordes sean '1'.
+int	ft_check_walls(t_game *game) // chequea que los bordes sean '1'.
 {
-	int	width; //cantidad de columnas.
-	int	height; //cantidad de filas.
 	int	x; //cada columna del mapa.
 	int	y; //cada fila del mapa.
 
-	ft_get_map_size(map, &width, &height); //obtinene el tamaño del mapa.
+	ft_get_map_size(game); //obtinene el tamaño del mapa.
 	x = 0;
-	while (x < width)
+	while (x < game->width)
 	{
-		if (map[0][x] != '1') //si la primera fila no es 1 da error.
+		if (game->map[0][x] != '1') //si la primera fila no es 1 da error.
 		{
 			ft_printf("Error\nEl borde superior debe ser todo '1'.\n");
 			return (0);
 		}
-		if (map[height - 1][x] != '1') //si la ultima fila no es 1 da error.
+		if (game->map[game->height - 1][x] != '1') //si la ultima fila no es 1 da error.
 		{
 			ft_printf("Error\nEl borde inferior debe ser todo '1'.\n");
 			return (0);
@@ -59,14 +57,14 @@ int	ft_check_walls(char **map) // chequea que los bordes sean '1'.
 		x++;
 	}
 	y = 0;
-	while (y < height)
+	while (y < game->height)
 	{
-		if (map[y][0] != '1') //Verifica que la primera columna (izquierda) de cada fila sea '1'
+		if (game->map[y][0] != '1') //Verifica que la primera columna (izquierda) de cada fila sea '1'
 		{
 			ft_printf("Error\nEl borde lateral izquierdo debe ser todo '1'.\n");
 			return (0);
 		}
-		if (map[y][width - 1] != '1') // Verifica que la última columna (derecha) de cada fila sea '1'
+		if (game->map[y][game->width - 1] != '1') // Verifica que la última columna (derecha) de cada fila sea '1'
 		{
 			ft_printf("Error\nEl borde lateral derecho debe ser todo '1'.\n");
 			return (0);
@@ -76,7 +74,7 @@ int	ft_check_walls(char **map) // chequea que los bordes sean '1'.
 	return (1);
 }
 
-int	ft_check_required_elements(char **map)
+int	ft_check_required_elements(t_game *game)
 {
 	int	p_count;
 	int	e_count;
@@ -88,16 +86,16 @@ int	ft_check_required_elements(char **map)
 	e_count = 0;
 	c_count = 0;
 	y = 0;
-	while (map[y])
+	while (game->map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (game->map[y][x])
 		{
-			if (map[y][x] == 'P')
+			if (game->map[y][x] == 'P')
 				p_count++;
-			if (map[y][x] == 'E')
+			if (game->map[y][x] == 'E')
 				e_count++;
-			if (map[y][x] == 'C')
+			if (game->map[y][x] == 'C')
 				c_count++;
 			x++; //cambia de columna.	
 		}
@@ -111,16 +109,16 @@ int	ft_check_required_elements(char **map)
 	return (1);
 }
 
-int	ft_check_rectangular(char **map)
+int	ft_check_rectangular(t_game *game)
 {
 	int		y;
 	size_t	i;
 	
 	y = 0;
-	i = ft_strlen(map[0]);
-	while (map[y])
+	i = ft_strlen(game->map[0]);
+	while (game->map[y])
 	{
-		if (ft_strlen(map[y]) != i)
+		if (ft_strlen(game->map[y]) != i)
 		{
 			ft_printf("Error\nLas filas del mapa no tienen la misma longitud.\n");
 		 	return (0);
@@ -130,17 +128,17 @@ int	ft_check_rectangular(char **map)
 	return (1);
 }
 
-int	ft_validate_map(char **map) //funcion principal para validar.
+int	ft_validate_map(t_game *game) //funcion principal para validar.
 {
-	if (!ft_check_valid_chars(map)) //chequea que sean caracteres validos.
+	if (!ft_check_valid_chars(game)) //chequea que sean caracteres validos.
 		return (0);
-	if (!ft_check_walls(map)) //chequea las paredes.
+	if (!ft_check_walls(game)) //chequea las paredes.
 		return (0);
-	if (!ft_check_required_elements(map))
+	if (!ft_check_required_elements(game))
 		return (0);
-	if (!ft_check_rectangular(map))
+	if (!ft_check_rectangular(game))
 		return (0);
-	if (!ft_validate_path(map))
+	if (!ft_validate_path(game))
 		return (0);
 	return (1);
 }

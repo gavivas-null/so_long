@@ -6,53 +6,52 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:11:37 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/10 20:57:31 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/11 21:31:15 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-char	**ft_copy_map(char **map)
+char	**ft_copy_map(t_game *game)
 {
-	char	**copy; // donde se guarda el mapa duplicado.
-	int		height; // saber cuantass filas tiene el mapa.
+	char	**copy_map; // donde se guarda el mapa duplicado.
 	int		i; //contador para recorrer el array.
 
-	ft_get_map_size(map, NULL, &height);
-	copy = ft_calloc(sizeof(char *), height + 1);
-	if (!copy)
+	ft_get_map_size(game);
+	copy_map = ft_calloc(sizeof(char *), game->height + 1);
+	if (!copy_map)
 		return (NULL);
 	i = 0;
-	while (map[i])
+	while (game->map[i])
 	{
-		copy[i] = ft_strdup(map[i]);
-		if (!copy[i])
+		copy_map[i] = ft_strdup(game->map[i]);
+		if (!copy_map[i])
 		{
 			while (--i >= 0)
-				free(copy[i]);
-			free(copy);
+				free(copy_map[i]);
+			free(copy_map);
 			return (NULL);
 		}
 		i++;
 	}
-	return (copy);
+	return (copy_map);
 }
 
-void	ft_find_player(char **map, int *x_player, int *y_player) 
+void	ft_find_player(char **copy_map, t_game *game) 
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (map[y])
+	while (copy_map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (copy_map[y][x])
 		{
-			if (map[y][x] == 'P') 
+			if (copy_map[y][x] == 'P') 
 			{
-				*x_player = x;
-				*y_player = y;
+				game->player_x = x;
+				game->player_y = y;
 				return;
 			}
 			x++; //cambia de columna.	
@@ -61,35 +60,31 @@ void	ft_find_player(char **map, int *x_player, int *y_player)
 	}
 }
 
-void ft_flood_fill(char **map, int x, int y) //revisa si el mapa es jugable.
+void ft_flood_fill(char **copy_map, int x, int y, t_game *game) //revisa si el mapa es jugable.
 {
-	int	width;
-	int	height;
-
-	ft_get_map_size(map, &width, &height);
-	if ((x < 0 || y < 0) || (x >= width || y >= height))
+	if ((x < 0 || y < 0) || (x >= game->width || y >= game->height))
 		return;
-	else if (map[y][x] == '1' || map[y][x] == 'V')
+	else if (copy_map[y][x] == '1' || copy_map[y][x] == 'V')
 		return;
-	map[y][x] = 'V';
-	ft_flood_fill(map, x + 1, y); //revisa la derecha
-	ft_flood_fill(map, x - 1, y); //revisa la izquierda
-	ft_flood_fill(map, x, y + 1); //revisa abajo
-	ft_flood_fill(map, x, y - 1); //revisa arriba
+	copy_map[y][x] = 'V';
+	ft_flood_fill(copy_map, x + 1, y, game); //revisa la derecha
+	ft_flood_fill(copy_map, x - 1, y, game); //revisa la izquierda
+	ft_flood_fill(copy_map, x, y + 1, game); //revisa abajo
+	ft_flood_fill(copy_map, x, y - 1, game); //revisa arriba
 }
 
-int	ft_map_playable(char **map)
+int	ft_map_playable(char **copy_map)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (map[y])
+	while (copy_map[y])
 	{
 		x = 0;
-		while (map[y][x])
+		while (copy_map[y][x])
 		{
-			if (map[y][x] == 'C' || map[y][x] == 'E')
+			if (copy_map[y][x] == 'C' || copy_map[y][x] == 'E')
 			{
 				ft_printf("Error\nQuedaron coleccionables o salida sin alcanzar.\n");
 				return (0);
@@ -101,23 +96,21 @@ int	ft_map_playable(char **map)
 	return (1);
 }
 
-int	ft_validate_path(char **map)
+int	ft_validate_path(t_game *game)
 {
-	char	**copy;
-	int		x;
-	int		y;
+	char	**copy_map;
 
-	copy = ft_copy_map(map);
-	if (!copy)
+	copy_map = ft_copy_map(game);
+	if (!copy_map)
 		return (0);
-	ft_find_player(copy, &x, &y);
-	ft_flood_fill(copy, x, y);
-	if (!ft_map_playable(copy))
+	ft_find_player(copy_map, game);
+	ft_flood_fill(copy_map, game->player_x, game->player_y, game);
+	if (!ft_map_playable(copy_map))
 	{
 		ft_printf("El mapa no es jugable.\n");
-		ft_free_split(copy);
+		ft_free_split(copy_map);
 		return (0);
 	}
-	ft_free_split(copy);
+	ft_free_split(copy_map);
 	return (1);
 }
