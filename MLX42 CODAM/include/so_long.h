@@ -7,6 +7,7 @@
 
 # include "../Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+# define TILE		64
 
 //------------------------------------------------ STRUCTS ------------------------------------------------
 typedef struct s_textures
@@ -20,15 +21,18 @@ typedef struct s_textures
 
 typedef struct s_game
 {
-	mlx_t	*mlx;
-	void	*win; //con codam ya no se necesita win porque mlx lo tiene todo.
-	char	**map;
-	t_textures tx;
-	int		player_x;
-	int		player_y;
-	int		width;
-	int		height;
-	int		moves;
+	mlx_t		*mlx;
+	mlx_image_t	*player_img;
+	t_textures 	tx;
+	void		*win;
+	char		**map;
+	int			player_x;
+	int			player_y;
+	int			width;
+	int			height;
+	int			moves;
+	int			point;
+	int			total_collectibles;
 } t_game;
 
 //------------------------------------------------ FUNCIONES ------------------------------------------------
@@ -61,11 +65,13 @@ void		ft_draw_walls(t_game *game, t_textures *tx);
 void		ft_draw_exit(t_game *game, t_textures *tx);
 void		ft_draw_collect(t_game *game, t_textures *tx);
 void		ft_draw_player(t_game *game, t_textures *tx);
+void		ft_disable_collect_at(t_game *game, int x, int y);
 
 //Controles
-void	ft_key_hook(void *param);
+void	ft_key_hook(mlx_key_data_t keydata, void *param);
+void		ft_move_player(t_game *game, int new_x, int new_y);
+
 
 //------------------------------------------------ DEFINIR ------------------------------------------------
-# define TILE		64
 
 #endif

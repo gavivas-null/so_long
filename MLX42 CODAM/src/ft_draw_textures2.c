@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 22:33:39 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/14 22:34:38 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/15 20:26:23 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@ mlx_image_t	*ft_load_png(mlx_t *mlx, char *path)
 	}
 	return (image);
 }
+
+void	ft_disable_collect_at(t_game *game, int x, int y)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < (game->tx.collect->count))
+	{
+		if (((game->tx.collect->instances[i].x) == (x * TILE))
+			&& ((game->tx.collect->instances[i].y) == (y * TILE)))
+		{
+			game->tx.collect->instances[i].enabled = false;
+			return ;
+		}
+		i++;
+	}
+}
+
 
 void	ft_load_textures(mlx_t *mlx, t_textures *tx)
 {
