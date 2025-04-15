@@ -6,11 +6,24 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/15 21:55:34 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/15 22:25:30 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+int	ft_check_ber(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if (len < 5)
+		return (0);
+	if (filename[len - 4] != '.' || filename[len - 3] != 'b'
+		|| filename[len - 2] != 'e' || filename[len - 1] != 'r')
+		return (0);
+	return (1);
+}
 
 void	ft_close_windows(void *param)
 {
@@ -26,7 +39,9 @@ int	main(int argc, char **argv)
 	t_game		game;
 
 	if (argc != 2)
-		return(ft_printf("Error\nDebes pasar un mapa como argumento\n"), 1);
+		return(ft_printf("Error\nDebes pasar un solo mapa como argumento\n"), 1);
+	if (!ft_check_ber(argv[1]))
+		return (ft_printf("Error\nEl archivo debe tener extensión .ber\n"), 1);
 	game.map = ft_read_map(argv[1]);
 	game.moves = 0;
 	game.point = 0;
