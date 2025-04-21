@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   bonus_so_long.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 21:55:26 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/21 21:26:16 by gavivas-         ###   ########.fr       */
+/*   Created: 2025/04/21 21:05:24 by gavivas-          #+#    #+#             */
+/*   Updated: 2025/04/21 21:57:27 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	ft_draw_all_textures(&game, &game.tx);
 	mlx_key_hook(game.mlx, ft_key_hook, &game);
 	mlx_close_hook(game.mlx, ft_close_windows, &game);
+	draw_moves_bonus(&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (0);
