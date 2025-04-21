@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map.c                                           :+:      :+:    :+:   */
+/*   ft_read_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:41:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/11 21:12:05 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:12:13 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	ft_get_map_size(t_game *game) //obtener el tamaño del mapa.
+void	ft_get_map_size(t_game *game)
 {
 	if (!game->map)
 	{
 		game->width = 0;
 		game->height = 0;
-		return;
+		return ;
 	}
 	game->width = ft_strlen(game->map[0]);
 	game->height = 0;
@@ -26,51 +26,51 @@ void	ft_get_map_size(t_game *game) //obtener el tamaño del mapa.
 		game->height++;
 }
 
-char	**ft_lst_2_array(t_list *list) //convierte una lista en un doble array.
+char	**ft_lst_2_array(t_list *list)
 {
 	int		size;
 	int		i;
 	char	**array;
 
-	size = ft_lstsize(list); //tamaño de la lista
-	array = ft_calloc(sizeof(char *), size + 1); //crea un array para almacenar cada contenido de la lista.
+	size = ft_lstsize(list);
+	array = ft_calloc(sizeof(char *), size + 1);
 	if (!array)
 		return (NULL);
 	i = 0;
-	while (list) //si la lista existe
+	while (list)
 	{
-		array[i] = ft_strdup(list->content); //duplica el contenido de cada nodo en un doble puntero de arrays (cada lugar en el array guardara cada contenido de la lista).
-		list = list->next; //la lista apunta al siguiente nodo para que al sumarle 1 a i apunte al siguiente nodo.
+		array[i] = ft_strdup(list->content);
+		list = list->next;
 		i++;
 	}
-	return (array); //retorna un doble arrays con el mapa.
+	return (array);
 }
 
-char	**ft_read_map(char *filename) //lee el mapa
+char	**ft_read_map(char *filename)
 {
-	t_list	*map_list = NULL;
+	t_list	*map_list;
 	t_list	*node;
 	int		fd;
 	char	*line;
 	char	**map;
 
+	map_list = NULL;
 	if (!filename)
 		return (ft_printf("Error\nNombre del archivo nulo.\n"), NULL);
-	fd = open(filename, O_RDONLY); //abre el mapa .ber
-	if (fd == -1) //si da error retorna error y null.
-		return(ft_printf("Error\nNo se pudo abrir el archivo.\n"), NULL);
-	line = get_next_line(fd); //lee la primera linea usando gnl.
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (ft_printf("Error\nNo se pudo abrir el archivo.\n"), NULL);
+	line = get_next_line(fd);
 	while (line)
 	{
 		if (line && ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
-		node = ft_lstnew(line); //guarda la linea en un nodo.
-		ft_lstadd_back(&map_list, node); //añade el nodo a una lista (en el primer llamado se crea la lista) al final.
-		line = get_next_line(fd); //vuelves a llamar a gnl para almacenar la siguiente linea o null.
+		node = ft_lstnew(line);
+		ft_lstadd_back(&map_list, node);
+		line = get_next_line(fd);
 	}
-	free(line); //liberas line para evitar leaks.
-	close(fd); //cierras el fd-archivo que se estaba leyendo.
-	map = ft_lst_2_array(map_list); //conviertes en array la lista con el mapa.
-	ft_lstclear(&map_list, free); //liberas-limpias la lista.
-	return (map); //retornas el mapa como array.
+	free(line);
+	close(fd);
+	map = ft_lst_2_array(map_list);
+	return (ft_lstclear(&map_list, free), map);
 }

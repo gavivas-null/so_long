@@ -40,7 +40,7 @@ typedef struct s_game
 //Validaciones
 int			ft_check_valid_chars(t_game *game);
 int			ft_check_walls(t_game *game);
-int			ft_check_required_elements(t_game *game);
+int			ft_check_elements(t_game *game, int p_count, int e_count, int c_count);
 int			ft_check_rectangular(t_game *game);
 int			ft_validate_map(t_game *game);
 int			ft_validate_path(t_game *game);
@@ -68,7 +68,7 @@ void		ft_draw_player(t_game *game, t_textures *tx);
 void		ft_disable_collect_at(t_game *game, int x, int y);
 
 //Controles
-void	ft_key_hook(mlx_key_data_t keydata, void *param);
+void		ft_key_hook(mlx_key_data_t keydata, void *param);
 void		ft_move_player(t_game *game, int new_x, int new_y);
 
 

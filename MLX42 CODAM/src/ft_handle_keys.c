@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/15 22:00:58 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:39:04 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 
 void	ft_move_player(t_game *game, int new_x, int new_y)
 {
-	
 	if (game->map[new_y][new_x] == '1')
 		return ;
 	if (game->map[new_y][new_x] == 'C')
@@ -49,7 +48,8 @@ void	ft_move_player(t_game *game, int new_x, int new_y)
 	game->tx.player->instances[0].y = new_y * TILE;
 	game->moves++;
 	ft_printf("Movimiento %d\n", game->moves);
-	if ((game->map[new_y][new_x] == 'E') && (game->point == game->total_collectibles))
+	if ((game->map[new_y][new_x] == 'E')
+		&& (game->point == game->total_collectibles))
 	{
 		ft_printf("WINNER\n");
 		mlx_close_window(game->mlx);

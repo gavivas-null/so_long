@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 22:33:39 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/15 20:26:23 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:38:25 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ft_disable_collect_at(t_game *game, int x, int y)
 		i++;
 	}
 }
-
 
 void	ft_load_textures(mlx_t *mlx, t_textures *tx)
 {

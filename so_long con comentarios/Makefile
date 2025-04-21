@@ -8,7 +8,8 @@ SRCS =	src/so_long.c \
 		src/ft_validate_map1.c \
 		src/ft_validate_map2.c \
 		src/ft_handle_keys.c \
-		src/ft_draw_textures.c
+		src/ft_draw_textures1.c \
+		src/ft_draw_textures2.c
 
 OBJS = $(SRCS:.c=.o)
 

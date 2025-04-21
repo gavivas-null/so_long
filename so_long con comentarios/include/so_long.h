@@ -8,7 +8,6 @@
 # include "../Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # define TILE		64
-# define DRAW_GRASS	
 
 //------------------------------------------------ STRUCTS ------------------------------------------------
 typedef struct s_textures
@@ -25,6 +24,7 @@ typedef struct s_game
 	mlx_t		*mlx;
 	mlx_image_t	*player_img;
 	t_textures 	tx;
+	void		*win;
 	char		**map;
 	int			player_x;
 	int			player_y;
@@ -57,11 +57,13 @@ void		ft_find_player(char **copy_map, t_game *game);
 void		ft_flood_fill(char **copy_map, int x, int y, t_game *game);
 
 //Graficos
-void	ft_load_textures(mlx_t *mlx, t_game *game, t_textures *tx);
-void	ft_draw_by_char(t_game *game, mlx_image_t *img, char target);
+void		ft_load_textures(mlx_t *mlx, t_textures *tx);
+void		ft_draw_all_textures(t_game *game, t_textures *tx);
 mlx_image_t	*ft_load_png(mlx_t *mlx, char *path);
-/* void		ft_draw_floor(t_game *game, t_textures *tx);
- */void		ft_draw_collect(t_game *game, t_textures *tx);
+void		ft_draw_floor(t_game *game, t_textures *tx);
+void		ft_draw_walls(t_game *game, t_textures *tx);
+void		ft_draw_exit(t_game *game, t_textures *tx);
+void		ft_draw_collect(t_game *game, t_textures *tx);
 void		ft_draw_player(t_game *game, t_textures *tx);
 void		ft_disable_collect_at(t_game *game, int x, int y);
 

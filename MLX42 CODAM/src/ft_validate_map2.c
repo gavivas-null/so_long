@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:11:37 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/15 21:26:51 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/21 20:10:14 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**ft_copy_map(t_game *game)
 {
-	char	**copy_map; // donde se guarda el mapa duplicado.
-	int		i; //contador para recorrer el array.
+	char	**copy_map;
+	int		i;
 
 	ft_get_map_size(game);
 	copy_map = ft_calloc(sizeof(char *), game->height + 1);
@@ -37,7 +37,7 @@ char	**ft_copy_map(t_game *game)
 	return (copy_map);
 }
 
-void	ft_find_player(char **copy_map, t_game *game) 
+void	ft_find_player(char **copy_map, t_game *game)
 {
 	int	x;
 	int	y;
@@ -48,29 +48,29 @@ void	ft_find_player(char **copy_map, t_game *game)
 		x = 0;
 		while (copy_map[y][x])
 		{
-			if (copy_map[y][x] == 'P') 
+			if (copy_map[y][x] == 'P')
 			{
 				game->player_x = x;
 				game->player_y = y;
-				return;
+				return ;
 			}
-			x++; //cambia de columna.	
+			x++;
 		}
-		y++; //cambia de fila.
+		y++;
 	}
 }
 
-void ft_flood_fill(char **copy_map, int x, int y, t_game *game) //revisa si el mapa es jugable.
+void	ft_flood_fill(char **copy_map, int x, int y, t_game *game)
 {
 	if ((x < 0 || y < 0) || (x >= game->width || y >= game->height))
-		return;
+		return ;
 	else if (copy_map[y][x] == '1' || copy_map[y][x] == 'V')
-		return;
+		return ;
 	copy_map[y][x] = 'V';
-	ft_flood_fill(copy_map, x + 1, y, game); //revisa la derecha
-	ft_flood_fill(copy_map, x - 1, y, game); //revisa la izquierda
-	ft_flood_fill(copy_map, x, y + 1, game); //revisa abajo
-	ft_flood_fill(copy_map, x, y - 1, game); //revisa arriba
+	ft_flood_fill(copy_map, x + 1, y, game);
+	ft_flood_fill(copy_map, x - 1, y, game);
+	ft_flood_fill(copy_map, x, y + 1, game);
+	ft_flood_fill(copy_map, x, y - 1, game);
 }
 
 int	ft_map_playable(char **copy_map)
@@ -86,12 +86,12 @@ int	ft_map_playable(char **copy_map)
 		{
 			if (copy_map[y][x] == 'C' || copy_map[y][x] == 'E')
 			{
-				ft_printf("Error\nQuedaron coleccionables o salida sin alcanzar.\n");
+				ft_printf("Error\nQuedaron objetos sin alcanzar.\n");
 				return (0);
 			}
-			x++; //cambia de columna.	
+			x++;
 		}
-		y++; //cambia de fila.
+		y++;
 	}
 	return (1);
 }

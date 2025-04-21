@@ -1,15 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 21:12:22 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/17 21:13:19 by gavivas-         ###   ########.fr       */
+/*   Created: 2024/08/19 18:52:37 by gavivas-          #+#    #+#             */
+/*   Updated: 2024/08/19 18:55:44 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "libft.h"
 
-int ft_count_char(t_game *game, char target)
+int	ft_lstsize(t_list *lst)
+{
+	t_list	*new;
+	int		count;
+
+	count = 0;
+	new = lst;
+	while (new != NULL)
+	{
+		count++;
+		new = new->next;
+	}
+	return (count);
+}
