@@ -89,6 +89,8 @@ void		ft_close_windows(void *param);
 void	draw_moves_bonus(t_game *game);
 void	load_player_sprites(t_game *game);
 void	update_player_sprites(t_game *game);
+void	print_sprites(t_game *game, int x, int y);
+
 
 
 //------------------------------------------------ DEFINIR ------------------------------------------------

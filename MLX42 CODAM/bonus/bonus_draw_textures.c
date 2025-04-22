@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_textures.c                                    :+:      :+:    :+:   */
+/*   bonus_draw_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:30:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:19:50 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:52:28 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_draw_player(t_game *game, t_textures *tx)
 	int	y;
 
 	y = 0;
+	(void)tx;
 	while (game->map[y])
 	{
 		x = 0;
@@ -53,11 +54,11 @@ void	ft_draw_player(t_game *game, t_textures *tx)
 		{
 			if (game->map[y][x] == 'P')
 			{
-				mlx_image_to_window(game->mlx, tx->player,
-					(x * TILE), (y * TILE));
 				game->player_x = x;
 				game->player_y = y;
-				game->player_img = tx->player;
+				game->player.direction = 'S';
+				print_sprites(game, x, y);
+				update_player_sprites(game);
 				return ;
 			}
 			x++;
@@ -110,7 +111,6 @@ void	ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx)
 	tx->wall = ft_load_png(mlx, "textures/pared.png");
 	tx->exit = ft_load_png(mlx, "textures/salida1.png");
 	tx->collect = ft_load_png(mlx, "textures/premio1.png");
-	tx->player = ft_load_png(mlx, "textures/player_front1.png");
 	ft_draw_map(game, tx, 0, 0);
 	ft_draw_player(game, tx);
 }

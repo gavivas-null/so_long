@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 21:05:24 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:31:33 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:45:27 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	if (!game.map || !ft_validate_map(&game))
 		return (free(game.map), 1);
 	game.mlx = mlx_init(game.width * TILE, game.height * TILE, "so_long", true);
+	load_player_sprites(&game);
 	ft_draw_all_textures(game.mlx, &game, &game.tx);
 	mlx_key_hook(game.mlx, ft_key_hook, &game);
 	mlx_close_hook(game.mlx, ft_close_windows, &game);

@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:23:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 21:16:38 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:51:28 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ void	load_player_sprites(t_game *game)
 	game->player.back[0] = ft_load_png(game->mlx, "textures/player_back1.png");
 	game->player.back[1] = ft_load_png(game->mlx, "textures/player_back2.png");
 	game->player.back[2] = ft_load_png(game->mlx, "textures/player_back3.png");
+}
+
+void	print_sprites(t_game *game, int x, int y)
+{
+	mlx_image_to_window(game->mlx, game->player.front[0], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.front[1], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.front[2], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.back[0], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.back[1], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.back[2], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.left[0], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.left[1], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.left[2], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.right[0], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.right[1], x * TILE, y * TILE);
+	mlx_image_to_window(game->mlx, game->player.right[2], x * TILE, y * TILE);
 }
 
 void	update_player_sprites(t_game *game)

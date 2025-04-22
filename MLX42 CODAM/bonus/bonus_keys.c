@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:31:47 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:40:39 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,25 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(game->mlx);
 	else if (keydata.key == MLX_KEY_W)
+	{
+		game->player.direction = 'W';
 		ft_move_player(game, game->player_x, game->player_y - 1);
+	}
 	else if (keydata.key == MLX_KEY_A)
+	{
+		game->player.direction = 'A';
 		ft_move_player(game, game->player_x - 1, game->player_y);
+	}
 	else if (keydata.key == MLX_KEY_S)
+	{
+		game->player.direction = 'S';
 		ft_move_player(game, game->player_x, game->player_y + 1);
+	}
 	else if (keydata.key == MLX_KEY_D)
+	{
+		game->player.direction = 'D';
 		ft_move_player(game, game->player_x + 1, game->player_y);
+	}
 }
 
 void	ft_move_player(t_game *game, int new_x, int new_y)
@@ -67,8 +79,7 @@ void	ft_move_player(t_game *game, int new_x, int new_y)
 	}
 	game->player_x = new_x;
 	game->player_y = new_y;
-	game->tx.player->instances[0].x = new_x * TILE;
-	game->tx.player->instances[0].y = new_y * TILE;
+	update_player_sprites(game);
 	game->moves++;
 	draw_moves_bonus(game);
 	if ((game->map[new_y][new_x] == 'E')
