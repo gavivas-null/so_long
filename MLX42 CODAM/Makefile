@@ -4,20 +4,22 @@ NAME_BONUS = so_long_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC_MAIN = src/so_long.c
-
-SRCS =	src/read_map.c \
-		src/validate_map1.c \
-		src/validate_map2.c \
+SRCS =	src/so_long.c \
+		src/draw_textures.c \
 		src/keys.c \
-		src/draw_textures1.c \
-		src/draw_textures2.c
+		src/read_map.c \
+		src/validate_map1.c \
+		src/validate_map2.c
 
-SRCSBONUS = bonus/draw_moves_bonus.c \
-			bonus/bonus_so_long.c
+SRCSBONUS = bonus/bonus_so_long.c \
+			bonus/bonus_draw_textures.c \
+			bonus/bonus_keys.c \
+			bonus/bonus_player_sprites.c \
+			bonus/bonus_read_map.c \
+			bonus/bonus_validate_map1.c \
+			bonus/bonus_validate_map2.c \
 
 OBJS = $(SRCS:.c=.o)
-OBJS_MAIN = $(SRC_MAIN:.c=.o)
 OBJSBONUS = $(SRCSBONUS:.c=.o)
 
 INCLUDES = -I include -I Libft -I MLX42/include
@@ -26,16 +28,6 @@ LIBFT = Libft/libft.a
 MLX_LIB = MLX42/build/libmlx42.a
 MLX_FLAGS = -ldl -lglfw -pthread -lm
 
-# --------------------------------------------------------------
-# Bonus
-# --------------------------------------------------------------
-bonus: $(NAME_BONUS)
-
-$(NAME_BONUS): $(OBJSBONUS) $(OBJS)
-	@$(MAKE) -C Libft > /dev/null
-	@$(MAKE) libmlx
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJSBONUS) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
-	@echo "✅ Bonus compilado correctamente."
 
 
 # --------------------------------------------------------------
@@ -43,10 +35,10 @@ $(NAME_BONUS): $(OBJSBONUS) $(OBJS)
 # --------------------------------------------------------------
 all: $(NAME)
 
-$(NAME): $(OBJS_MAIN) $(OBJS)
+$(NAME):  $(OBJS)
 	@$(MAKE) -C Libft > /dev/null
 	@$(MAKE) libmlx
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS_MAIN) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 	@echo "✅ Proyecto compilado correctamente."
 
 # --------------------------------------------------------------
@@ -65,10 +57,21 @@ libmlx:
 	@echo "📦 MLX42 compilada."
 
 # --------------------------------------------------------------
+# Bonus
+# --------------------------------------------------------------
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJSBONUS)
+	@$(MAKE) -C Libft > /dev/null
+	@$(MAKE) libmlx
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJSBONUS) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS) -o $(NAME_BONUS)
+	@echo "✅ Bonus compilado correctamente."
+
+# --------------------------------------------------------------
 # 🧹 Limpieza
 # --------------------------------------------------------------
 clean:
-	@rm -f $(OBJS) $(OBJSBONUS)
+	@rm -f $(OBJS) $(OBJSBONUS) $(OBJS_MAIN)
 	@$(MAKE) -C Libft clean > /dev/null
 	@$(MAKE) -C MLX42/build clean > /dev/null
 	@echo "🧹 Archivos objeto y temporales eliminados."
