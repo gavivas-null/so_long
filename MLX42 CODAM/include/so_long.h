@@ -29,6 +29,15 @@ typedef struct s_player
 	char		direction;
 }t_player;
 
+typedef struct s_enemy
+{
+	int		enemy_x;
+	int		enemy_y;
+	mlx_image_t	*sprites[4];
+	char	direction;
+	int		anim_frame;
+}	t_enemy;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
@@ -36,6 +45,8 @@ typedef struct s_game
 	mlx_image_t *move_txt;
 	t_textures 	tx;
 	t_player	player;
+	t_enemy		enemy;
+	t_enemy		enemies[10];
 	void		*win;
 	char		**map;
 	int			player_x;
@@ -88,8 +99,15 @@ void		ft_close_windows(void *param);
 //Bonus
 void	draw_moves_bonus(t_game *game);
 void	load_player_sprites(t_game *game);
-void	update_player_sprites(t_game *game);
-void	print_sprites(t_game *game, int x, int y);
+void	update_player_sprites(t_game *game, t_player *player);
+void	ft_player_sprites(t_game *game, int x, int y);
+void	disable_all_player_sprites(t_game *game);
+void	ft_draw_enemy(t_game *game, t_enemy *enemy);
+void	update_enemy_sprites(t_game *game, t_enemy *enemy);
+void	ft_enemy_sprites(t_game *game, int x, int y);
+void	disable_all_enemy_sprites(t_game *game);
+void	load_enemy_sprites(t_game *game);
+
 
 
 

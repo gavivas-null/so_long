@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:40:39 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:17:47 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,19 @@ void	ft_move_player(t_game *game, int new_x, int new_y)
 	}
 	game->player_x = new_x;
 	game->player_y = new_y;
-	update_player_sprites(game);
+	update_player_sprites(game, &game->player);
+	update_enemy_sprites(game, &game->enemy);
 	game->moves++;
 	draw_moves_bonus(game);
 	if ((game->map[new_y][new_x] == 'E')
 		&& (game->point == game->total_collectibles))
 	{
 		ft_printf("WINNER\n");
+		mlx_close_window(game->mlx);
+	}
+	if (game->map[new_y][new_x] == 'X')
+	{
+		ft_printf("LOSER");
 		mlx_close_window(game->mlx);
 	}
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map1.c                                    :+:      :+:    :+:   */
+/*   bonus_validate_map1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:31:51 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:17:15 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:23:28 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_elements(t_game *game, int p_count, int e_count, int c_count)
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (!ft_strrchr("01PCE", game->map[y][x]))
+			if (!ft_strrchr("01PCEX", game->map[y][x]))
 				return (ft_printf("Error\nMapa no válido.\n"), 0);
 			if (game->map[y][x] == 'P')
 				p_count++;

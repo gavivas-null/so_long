@@ -18,6 +18,7 @@ SRCSBONUS = bonus/bonus_so_long.c \
 			bonus/bonus_read_map.c \
 			bonus/bonus_validate_map1.c \
 			bonus/bonus_validate_map2.c \
+			bonus/bonus_enemy.c
 
 OBJS = $(SRCS:.c=.o)
 OBJSBONUS = $(SRCSBONUS:.c=.o)

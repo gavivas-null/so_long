@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:23:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:51:28 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:57:26 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,22 @@ void	load_player_sprites(t_game *game)
 	game->player.back[2] = ft_load_png(game->mlx, "textures/player_back3.png");
 }
 
-void	print_sprites(t_game *game, int x, int y)
+void	disable_all_player_sprites(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		game->player.right[i]->enabled = false;
+		game->player.left[i]->enabled = false;
+		game->player.front[i]->enabled = false;
+		game->player.back[i]->enabled = false;
+		i++;
+	}
+}
+
+void	ft_player_sprites(t_game *game, int x, int y)
 {
 	mlx_image_to_window(game->mlx, game->player.front[0], x * TILE, y * TILE);
 	mlx_image_to_window(game->mlx, game->player.front[1], x * TILE, y * TILE);
@@ -44,46 +59,36 @@ void	print_sprites(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, game->player.right[2], x * TILE, y * TILE);
 }
 
-void	update_player_sprites(t_game *game)
+void	update_player_sprites(t_game *game, t_player *player)
 {
-	if(game->player.anim_frame == 2)
-		game->player.anim_frame = 0;
+	if (player->anim_frame == 2)
+		player->anim_frame = 0;
 	else
-		game->player.anim_frame++;
-	game->player.right[0]->enabled = false;
-	game->player.right[1]->enabled = false;
-	game->player.right[2]->enabled = false;
-	game->player.left[0]->enabled = false;
-	game->player.left[1]->enabled = false;
-	game->player.left[2]->enabled = false;
-	game->player.front[0]->enabled = false;
-	game->player.front[1]->enabled = false;
-	game->player.front[2]->enabled = false;
-	game->player.back[0]->enabled = false;
-	game->player.back[1]->enabled = false;
-	game->player.back[2]->enabled = false;
-	if (game->player.direction == 'W')
+		player->anim_frame++;
+	disable_all_player_sprites(game);
+	if (player->direction == 'W')
 	{
-		game->player.back[game->player.anim_frame]->enabled = true;
-		game->player.back[game->player.anim_frame]->instances[0].x = game->player_x * TILE;
-		game->player.back[game->player.anim_frame]->instances[0].y = game->player_y * TILE;
+		player->back[player->anim_frame]->enabled = true;
+		player->back[player->anim_frame]->instances[0].x = game->player_x * TILE;
+		player->back[player->anim_frame]->instances[0].y = game->player_y * TILE;
 	}
-	else if (game->player.direction == 'S')
+	else if (player->direction == 'S')
 	{
-		game->player.front[game->player.anim_frame]->enabled = true;
-		game->player.front[game->player.anim_frame]->instances[0].x = game->player_x * TILE;
-		game->player.front[game->player.anim_frame]->instances[0].y = game->player_y * TILE;
+		player->front[player->anim_frame]->enabled = true;
+		player->front[player->anim_frame]->instances[0].x = game->player_x * TILE;
+		player->front[player->anim_frame]->instances[0].y = game->player_y * TILE;
 	}
-	else if (game->player.direction == 'A')
+	else if (player->direction == 'A')
 	{
-		game->player.left[game->player.anim_frame]->enabled = true;
-		game->player.left[game->player.anim_frame]->instances[0].x = game->player_x * TILE;
-		game->player.left[game->player.anim_frame]->instances[0].y = game->player_y * TILE;
+		player->left[player->anim_frame]->enabled = true;
+		player->left[player->anim_frame]->instances[0].x = game->player_x * TILE;
+		player->left[player->anim_frame]->instances[0].y = game->player_y * TILE;
 	}
-	else if (game->player.direction == 'D')
+	else if (player->direction == 'D')
 	{
-		game->player.right[game->player.anim_frame]->enabled = true;
-		game->player.right[game->player.anim_frame]->instances[0].x = game->player_x * TILE;
-		game->player.right[game->player.anim_frame]->instances[0].y = game->player_y * TILE;
+		player->right[player->anim_frame]->enabled = true;
+		player->right[player->anim_frame]->instances[0].x = game->player_x * TILE;
+		player->right[player->anim_frame]->instances[0].y = game->player_y * TILE;
 	}
 }
+
