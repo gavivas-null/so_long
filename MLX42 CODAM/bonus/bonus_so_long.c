@@ -6,11 +6,35 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 21:05:24 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/23 21:03:14 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:32:24 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+void	end_game(t_game *game, int new_x, int new_y)
+{
+	if ((game->map[new_y][new_x] == 'E')
+		&& (game->point == game->total_collectibles))
+	{
+		ft_printf("WINNER\n");
+		mlx_close_window(game->mlx);
+	}
+	if (game->map[new_y][new_x] == 'X')
+	{
+		ft_printf("LOSER");
+		mlx_close_window(game->mlx);
+	}
+}
+
+void	ft_close_windows(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	mlx_terminate(game->mlx);
+	exit(0);
+}
 
 int	main(int argc, char **argv)
 {

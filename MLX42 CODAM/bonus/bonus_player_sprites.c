@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:23:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/23 19:57:26 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:34:35 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	load_player_sprites(t_game *game)
 {
-	game->player.right[0] = ft_load_png(game->mlx, "textures/player_right1.png");
-	game->player.right[1] = ft_load_png(game->mlx, "textures/player_right2.png");
-	game->player.right[2] = ft_load_png(game->mlx, "textures/player_right3.png");
-	game->player.left[0] = ft_load_png(game->mlx, "textures/player_left1.png");
-	game->player.left[1] = ft_load_png(game->mlx, "textures/player_left2.png");
-	game->player.left[2] = ft_load_png(game->mlx, "textures/player_left3.png");
-	game->player.front[0] = ft_load_png(game->mlx, "textures/player_front1.png");
-	game->player.front[1] = ft_load_png(game->mlx, "textures/player_front2.png");
-	game->player.front[2] = ft_load_png(game->mlx, "textures/player_front3.png");
-	game->player.back[0] = ft_load_png(game->mlx, "textures/player_back1.png");
-	game->player.back[1] = ft_load_png(game->mlx, "textures/player_back2.png");
-	game->player.back[2] = ft_load_png(game->mlx, "textures/player_back3.png");
+	game->player.right[0] = ft_load_png(game->mlx, "textures/player_r1.png");
+	game->player.right[1] = ft_load_png(game->mlx, "textures/player_r2.png");
+	game->player.right[2] = ft_load_png(game->mlx, "textures/player_r3.png");
+	game->player.left[0] = ft_load_png(game->mlx, "textures/player_l1.png");
+	game->player.left[1] = ft_load_png(game->mlx, "textures/player_l2.png");
+	game->player.left[2] = ft_load_png(game->mlx, "textures/player_l3.png");
+	game->player.front[0] = ft_load_png(game->mlx, "textures/player_f1.png");
+	game->player.front[1] = ft_load_png(game->mlx, "textures/player_f2.png");
+	game->player.front[2] = ft_load_png(game->mlx, "textures/player_f3.png");
+	game->player.back[0] = ft_load_png(game->mlx, "textures/player_b1.png");
+	game->player.back[1] = ft_load_png(game->mlx, "textures/player_b2.png");
+	game->player.back[2] = ft_load_png(game->mlx, "textures/player_b3.png");
 }
 
 void	disable_all_player_sprites(t_game *game)
@@ -69,26 +69,38 @@ void	update_player_sprites(t_game *game, t_player *player)
 	if (player->direction == 'W')
 	{
 		player->back[player->anim_frame]->enabled = true;
-		player->back[player->anim_frame]->instances[0].x = game->player_x * TILE;
-		player->back[player->anim_frame]->instances[0].y = game->player_y * TILE;
+		player->back[player->anim_frame]->instances[0].x
+			= game->player_x * TILE;
+		player->back[player->anim_frame]->instances[0].y
+			= game->player_y * TILE;
 	}
 	else if (player->direction == 'S')
 	{
 		player->front[player->anim_frame]->enabled = true;
-		player->front[player->anim_frame]->instances[0].x = game->player_x * TILE;
-		player->front[player->anim_frame]->instances[0].y = game->player_y * TILE;
+		player->front[player->anim_frame]->instances[0].x
+			= game->player_x * TILE;
+		player->front[player->anim_frame]->instances[0].y
+			= game->player_y * TILE;
 	}
-	else if (player->direction == 'A')
+	update_player_sprites2(game, player);
+}
+
+void	update_player_sprites2(t_game *game, t_player *player)
+{
+	if (player->direction == 'A')
 	{
 		player->left[player->anim_frame]->enabled = true;
-		player->left[player->anim_frame]->instances[0].x = game->player_x * TILE;
-		player->left[player->anim_frame]->instances[0].y = game->player_y * TILE;
+		player->left[player->anim_frame]->instances[0].x
+			= game->player_x * TILE;
+		player->left[player->anim_frame]->instances[0].y
+			= game->player_y * TILE;
 	}
 	else if (player->direction == 'D')
 	{
 		player->right[player->anim_frame]->enabled = true;
-		player->right[player->anim_frame]->instances[0].x = game->player_x * TILE;
-		player->right[player->anim_frame]->instances[0].y = game->player_y * TILE;
+		player->right[player->anim_frame]->instances[0].x
+			= game->player_x * TILE;
+		player->right[player->anim_frame]->instances[0].y
+			= game->player_y * TILE;
 	}
 }
-

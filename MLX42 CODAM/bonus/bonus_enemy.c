@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:09:07 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/23 21:27:06 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:36:00 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	load_enemy_sprites(t_game *game)
 {
-	game->enemy.sprites[0] = ft_load_png(game->mlx, "textures/enemy_front1.png");
-	game->enemy.sprites[2] = ft_load_png(game->mlx, "textures/enemy_left1.png");
-	game->enemy.sprites[1] = ft_load_png(game->mlx, "textures/enemy_back1.png");
-	game->enemy.sprites[3] = ft_load_png(game->mlx, "textures/enemy_right1.png");
-
+	game->enemy.sprites[0] = ft_load_png(game->mlx, "textures/enemy_f1.png");
+	game->enemy.sprites[2] = ft_load_png(game->mlx, "textures/enemy_l1.png");
+	game->enemy.sprites[1] = ft_load_png(game->mlx, "textures/enemy_b1.png");
+	game->enemy.sprites[3] = ft_load_png(game->mlx, "textures/enemy_r1.png");
 }
 
 void	disable_all_enemy_sprites(t_game *game)
@@ -39,7 +38,6 @@ void	ft_enemy_sprites(t_game *game, int x, int y)
 	mlx_image_to_window(game->mlx, game->enemy.sprites[1], x * TILE, y * TILE);
 	mlx_image_to_window(game->mlx, game->enemy.sprites[2], x * TILE, y * TILE);
 	mlx_image_to_window(game->mlx, game->enemy.sprites[3], x * TILE, y * TILE);
-
 }
 
 void	update_enemy_sprites(t_game *game, t_enemy *enemy)

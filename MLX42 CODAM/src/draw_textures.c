@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:30:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:19:50 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:40:55 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	ft_disable_collect_at(t_game *game, int x, int y)
 void	ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx)
 {
 	tx->grass = ft_load_png(mlx, "textures/tileset.png");
-	tx->wall = ft_load_png(mlx, "textures/pared.png");
-	tx->exit = ft_load_png(mlx, "textures/salida1.png");
-	tx->collect = ft_load_png(mlx, "textures/premio1.png");
-	tx->player = ft_load_png(mlx, "textures/player_front1.png");
+	tx->wall = ft_load_png(mlx, "textures/wall.png");
+	tx->exit = ft_load_png(mlx, "textures/exit1.png");
+	tx->collect = ft_load_png(mlx, "textures/collectable1.png");
+	tx->player = ft_load_png(mlx, "textures/player_f1.png");
 	ft_draw_map(game, tx, 0, 0);
 	ft_draw_player(game, tx);
 }

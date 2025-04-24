@@ -6,20 +6,11 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/23 21:17:47 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 18:38:55 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-void	ft_close_windows(void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	mlx_terminate(game->mlx);
-	exit(0);
-}
 
 void	draw_moves_bonus(t_game *game)
 {
@@ -54,7 +45,12 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 		game->player.direction = 'A';
 		ft_move_player(game, game->player_x - 1, game->player_y);
 	}
-	else if (keydata.key == MLX_KEY_S)
+	ft_key_hook2(keydata, game);
+}
+
+void	ft_key_hook2(mlx_key_data_t keydata, t_game *game)
+{
+	if (keydata.key == MLX_KEY_S)
 	{
 		game->player.direction = 'S';
 		ft_move_player(game, game->player_x, game->player_y + 1);
@@ -83,15 +79,5 @@ void	ft_move_player(t_game *game, int new_x, int new_y)
 	update_enemy_sprites(game, &game->enemy);
 	game->moves++;
 	draw_moves_bonus(game);
-	if ((game->map[new_y][new_x] == 'E')
-		&& (game->point == game->total_collectibles))
-	{
-		ft_printf("WINNER\n");
-		mlx_close_window(game->mlx);
-	}
-	if (game->map[new_y][new_x] == 'X')
-	{
-		ft_printf("LOSER");
-		mlx_close_window(game->mlx);
-	}
+	end_game(game, new_x, new_y);
 }

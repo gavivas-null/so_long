@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 18:51:29 by gavivas-          #+#    #+#             */
-/*   Updated: 2024/08/19 18:55:05 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/24 19:04:20 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*arr;
 	size_t	totalsize;
 
-	totalsize = count * size;
-	if ((SIZE_MAX / size) < count && size != 0)
+	if (size != 0 && count > SIZE_MAX / size)
 		return (NULL);
+	totalsize = count * size;
 	arr = (void *)malloc(totalsize);
 	if (arr == NULL)
 		return (NULL);
-	ft_bzero(arr, size * count);
+	ft_bzero(arr, totalsize);
 	return (arr);
 }
 

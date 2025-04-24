@@ -107,6 +107,9 @@ void	update_enemy_sprites(t_game *game, t_enemy *enemy);
 void	ft_enemy_sprites(t_game *game, int x, int y);
 void	disable_all_enemy_sprites(t_game *game);
 void	load_enemy_sprites(t_game *game);
+void	end_game(t_game *game, int new_x, int new_y);
+void	update_player_sprites2(t_game *game, t_player *player);
+void	ft_key_hook2(mlx_key_data_t keydata, t_game *game);
 
 
 
