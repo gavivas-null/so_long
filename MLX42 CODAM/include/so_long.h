@@ -38,12 +38,21 @@ typedef struct s_enemy
 	int		anim_frame;
 }	t_enemy;
 
+typedef struct s_exit
+{
+	mlx_image_t *sprites[2];
+	int			exit_x;
+	int			exit_y;
+	int			anim_frame;
+}	t_exit;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*player_img;
 	mlx_image_t *move_txt;
 	t_textures 	tx;
+	t_exit		exit;
 	t_player	player;
 	t_enemy		enemy;
 	t_enemy		enemies[10];
@@ -111,7 +120,11 @@ void	end_game(t_game *game, int new_x, int new_y);
 void	update_player_sprites2(t_game *game, t_player *player);
 void	ft_key_hook2(mlx_key_data_t keydata, t_game *game);
 
-
+void	load_exit_sprites(t_game *game);
+void	disable_all_exit_sprites(t_game *game);
+void	ft_exit_sprites(t_game *game, int x, int y);
+void	update_exit_sprites(t_game *game, t_exit *exit);
+void	ft_draw_exit(t_game *game, t_exit *exit);
 
 
 //------------------------------------------------ DEFINIR ------------------------------------------------

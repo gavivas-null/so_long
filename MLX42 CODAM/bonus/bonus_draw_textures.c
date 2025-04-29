@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:30:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/24 18:13:46 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/04/29 22:06:36 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	ft_draw_map(t_game *game, t_textures *tx, int x, int y)
 				(x * TILE), (y * TILE));
 			if (game->map[y][x] == '1')
 				mlx_image_to_window(game->mlx, tx->wall,
-					(x * TILE), (y * TILE));
-			else if (game->map[y][x] == 'E')
-				mlx_image_to_window(game->mlx, tx->exit,
 					(x * TILE), (y * TILE));
 			else if (game->map[y][x] == 'C')
 			{
@@ -109,9 +106,9 @@ void	ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx)
 {
 	tx->grass = ft_load_png(mlx, "textures/tileset.png");
 	tx->wall = ft_load_png(mlx, "textures/wall.png");
-	tx->exit = ft_load_png(mlx, "textures/exit1.png");
 	tx->collect = ft_load_png(mlx, "textures/collectable1.png");
 	ft_draw_map(game, tx, 0, 0);
+	ft_draw_exit(game, &game->exit);
 	ft_draw_player(game, tx);
 	ft_draw_enemy(game, &game->enemy);
 }
