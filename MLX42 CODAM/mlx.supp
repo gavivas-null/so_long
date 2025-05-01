@@ -1,0 +1,101 @@
+{
+   libX11_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*malloc*
+   obj:*libX11*.so*
+}
+
+{
+   libLLVM_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*new*
+   obj:*libLLVM*.so*
+}
+
+{
+   glfw_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*malloc*
+   obj:*libglfw*.so*
+}
+
+{
+   libc_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*calloc*
+   obj:*libc-*.so*
+}
+
+{
+   strdup_system
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*strdup*
+}
+
+{
+   mlx_malloc_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*malloc*
+   obj:*libmlx42.so*
+}
+
+{
+   mlx_calloc_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:*calloc*
+   obj:*libmlx42.so*
+}
+
+{
+   mlx_xopen_display
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:XOpenDisplay
+   obj:*libmlx42.so*
+}
+
+{
+   mlx_create_window
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:mlx_create_window
+   obj:*libmlx42.so*
+}
+
+{
+   mlx_add_frame
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:add_frame_to_image
+   obj:*libmlx42.so*
+}
+
+{
+   mlx_internal_hook
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:register_hooks
+   obj:*libmlx42.so*
+}
+
+{
+   glibc_dlopen_0byte
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:*malloc*
+   obj:*vgpreload_memcheck-*.so
+}
+
+{
+   X11_all
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   obj:*libX11.so*
+}

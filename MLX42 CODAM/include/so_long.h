@@ -17,7 +17,7 @@ typedef struct s_textures
 	mlx_image_t	*exit;
 	mlx_image_t	*collect;
 	mlx_image_t	*player;
-}   t_textures;
+}	t_textures;
 
 typedef struct s_player
 {
@@ -27,15 +27,15 @@ typedef struct s_player
 	mlx_image_t	*back[3];
 	int			anim_frame;
 	char		direction;
-}t_player;
+}	t_player;
 
 typedef struct s_enemy
 {
-	int		enemy_x;
-	int		enemy_y;
+	int			enemy_x;
+	int			enemy_y;
 	mlx_image_t	*sprites[4];
-	char	direction;
-	int		anim_frame;
+	char		direction;
+	int			anim_frame;
 }	t_enemy;
 
 typedef struct s_exit
@@ -65,7 +65,9 @@ typedef struct s_game
 	int			moves;
 	int			point;
 	int			total_collectibles;
-} t_game;
+	int			screen_h;
+	int			screen_w;
+}	t_game;
 
 
 
@@ -80,6 +82,7 @@ int			ft_validate_map(t_game *game);
 int			ft_validate_path(t_game *game);
 int			ft_map_playable(char **copy_map);
 int			ft_check_ber(char *filename);
+int			check_map_size(t_game *game);
 
 
 //Lectura del mapa
@@ -94,15 +97,16 @@ void		ft_flood_fill(char **copy_map, int x, int y, t_game *game);
 
 //Graficos
 void		ft_draw_map(t_game *game, t_textures *tx, int x, int y);
-void		ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx);
+void		ft_draw_all_textures(t_game *game, t_textures *tx);
 void		ft_draw_player(t_game *game, t_textures *tx);
-mlx_image_t	*ft_load_png(mlx_t *mlx, char *path);
+mlx_image_t	*ft_load_png(t_game *game, char *path);
 void		ft_disable_collect_at(t_game *game, int x, int y);
 
 //Controles
 void		ft_key_hook(mlx_key_data_t keydata, void *param);
 void		ft_move_player(t_game *game, int new_x, int new_y);
 void		ft_close_windows(void *param);
+void		clean_exit(t_game *game, int code);
 
 
 //Bonus
@@ -125,6 +129,7 @@ void	disable_all_exit_sprites(t_game *game);
 void	ft_exit_sprites(t_game *game, int x, int y);
 void	update_exit_sprites(t_game *game, t_exit *exit);
 void	ft_draw_exit(t_game *game, t_exit *exit);
+void	init_int(t_game *game);
 
 
 //------------------------------------------------ DEFINIR ------------------------------------------------

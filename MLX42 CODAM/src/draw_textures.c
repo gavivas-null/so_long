@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:30:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/24 18:40:55 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/01 21:36:42 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_draw_player(t_game *game, t_textures *tx)
 	}
 }
 
-mlx_image_t	*ft_load_png(mlx_t *mlx, char *path)
+mlx_image_t	*ft_load_png(t_game *game, char *path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -75,14 +75,14 @@ mlx_image_t	*ft_load_png(mlx_t *mlx, char *path)
 	if (!texture)
 	{
 		ft_printf("❌ Error al cargar %s\n", path);
-		exit(1);
+		clean_exit(game, 0);
 	}
-	image = mlx_texture_to_image(mlx, texture);
+	image = mlx_texture_to_image(game->mlx, texture);
 	mlx_delete_texture(texture);
 	if (!image)
 	{
 		ft_printf("❌ Error al crear imagen desde %s\n", path);
-		exit(1);
+		clean_exit(game, 0);
 	}
 	return (image);
 }
@@ -104,13 +104,13 @@ void	ft_disable_collect_at(t_game *game, int x, int y)
 	}
 }
 
-void	ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx)
+void	ft_draw_all_textures(t_game *game, t_textures *tx)
 {
-	tx->grass = ft_load_png(mlx, "textures/tileset.png");
-	tx->wall = ft_load_png(mlx, "textures/wall.png");
-	tx->exit = ft_load_png(mlx, "textures/exit1.png");
-	tx->collect = ft_load_png(mlx, "textures/collectable1.png");
-	tx->player = ft_load_png(mlx, "textures/player_f1.png");
+	tx->grass = ft_load_png(game, "textures/tileset.png");
+	tx->wall = ft_load_png(game, "textures/wall.png");
+	tx->exit = ft_load_png(game, "textures/exit1.png");
+	tx->collect = ft_load_png(game, "textures/collectable1.png");
+	tx->player = ft_load_png(game, "textures/player_f1.png");
 	ft_draw_map(game, tx, 0, 0);
 	ft_draw_player(game, tx);
 }

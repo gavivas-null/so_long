@@ -2,14 +2,16 @@ NAME = so_long
 NAME_BONUS = so_long_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
+#CFLAGS += -fsanitize=address
 
 SRCS =	src/so_long.c \
 		src/draw_textures.c \
 		src/keys.c \
 		src/read_map.c \
 		src/validate_map1.c \
-		src/validate_map2.c
+		src/validate_map2.c \
+		src/free_all.c
 
 SRCSBONUS = bonus/bonus_so_long.c \
 			bonus/bonus_draw_textures.c \
@@ -19,7 +21,8 @@ SRCSBONUS = bonus/bonus_so_long.c \
 			bonus/bonus_validate_map1.c \
 			bonus/bonus_validate_map2.c \
 			bonus/bonus_enemy.c \
-			bonus/bonus_exit_sprite.c
+			bonus/bonus_exit_sprite.c \
+			bonus/bonus_free_all.c
 
 OBJS = $(SRCS:.c=.o)
 OBJSBONUS = $(SRCSBONUS:.c=.o)
@@ -87,4 +90,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re libmlx
+.PHONY: all clean fclean re bonus libmlx

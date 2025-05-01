@@ -6,11 +6,23 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:31:51 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/23 18:23:28 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:32:59 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+int	check_map_size(t_game *game)
+{
+	int	map_w;
+	int	map_h;
+
+	map_w = game->width * TILE;
+	map_h = game->height * TILE;
+	if (map_w > game->screen_w || map_h > game->screen_h)
+		return (ft_printf("Error.\nMapa demasiado grande\n"), 0);
+	return (1);
+}
 
 int	ft_check_walls(t_game *game)
 {
@@ -81,6 +93,8 @@ int	ft_check_rectangular(t_game *game)
 
 int	ft_validate_map(t_game *game)
 {
+	if (!check_map_size(game))
+		return (0);
 	if (!ft_check_walls(game))
 		return (0);
 	if (!ft_check_elements(game, 0, 0, 0))
