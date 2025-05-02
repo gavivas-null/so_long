@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 21:30:43 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/29 22:06:36 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:23:45 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_draw_player(t_game *game, t_textures *tx)
 	}
 }
 
-mlx_image_t	*ft_load_png(mlx_t *mlx, char *path)
+mlx_image_t	*ft_load_png(t_game *game, char *path)
 {
 	mlx_texture_t	*texture;
 	mlx_image_t		*image;
@@ -73,14 +73,14 @@ mlx_image_t	*ft_load_png(mlx_t *mlx, char *path)
 	if (!texture)
 	{
 		ft_printf("❌ Error al cargar %s\n", path);
-		exit(1);
+		clean_exit(game, 0);
 	}
-	image = mlx_texture_to_image(mlx, texture);
+	image = mlx_texture_to_image(game->mlx, texture);
 	mlx_delete_texture(texture);
 	if (!image)
 	{
 		ft_printf("❌ Error al crear imagen desde %s\n", path);
-		exit(1);
+		clean_exit(game, 0);
 	}
 	return (image);
 }
@@ -102,11 +102,11 @@ void	ft_disable_collect_at(t_game *game, int x, int y)
 	}
 }
 
-void	ft_draw_all_textures(mlx_t *mlx, t_game *game, t_textures *tx)
+void	ft_draw_all_textures(t_game *game, t_textures *tx)
 {
-	tx->grass = ft_load_png(mlx, "textures/tileset.png");
-	tx->wall = ft_load_png(mlx, "textures/wall.png");
-	tx->collect = ft_load_png(mlx, "textures/collectable1.png");
+	tx->grass = ft_load_png(game, "textures/tileset.png");
+	tx->wall = ft_load_png(game, "textures/wall.png");
+	tx->collect = ft_load_png(game, "textures/collectable1.png");
 	ft_draw_map(game, tx, 0, 0);
 	ft_draw_exit(game, &game->exit);
 	ft_draw_player(game, tx);

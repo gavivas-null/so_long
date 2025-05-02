@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 21:05:24 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/05/01 19:33:24 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 19:35:44 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_int(t_game *game)
 	game->player.anim_frame = 0;
 	game->enemy.anim_frame = 0;
 	game->exit.anim_frame = 0;
+	game->move_txt = NULL;
 }
 
 void	end_game(t_game *game, int new_x, int new_y)
@@ -29,12 +30,12 @@ void	end_game(t_game *game, int new_x, int new_y)
 		&& (game->point == game->total_collectibles))
 	{
 		ft_printf("WINNER\n");
-		mlx_close_window(game->mlx);
+		clean_exit(game, 0);
 	}
 	if (game->map[new_y][new_x] == 'X')
 	{
-		ft_printf("LOSER");
-		mlx_close_window(game->mlx);
+		ft_printf("LOSER\n");
+		clean_exit(game, 0);
 	}
 }
 
@@ -43,8 +44,7 @@ void	ft_close_windows(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	mlx_terminate(game->mlx);
-	exit(0);
+	clean_exit(game, 0);
 }
 
 int	main(int argc, char **argv)
@@ -62,14 +62,14 @@ int	main(int argc, char **argv)
 	game.mlx = mlx_init(game.width * TILE, game.height * TILE, "so_long", true);
 	mlx_get_monitor_size(0, &game.screen_w, &game.screen_h);
 	if (!game.map || !ft_validate_map(&game))
-		return (free(game.map), 1);
+		clean_exit(&game, 0);
 	load_player_sprites(&game);
 	load_enemy_sprites(&game);
 	load_exit_sprites(&game);
-	ft_draw_all_textures(game.mlx, &game, &game.tx);
+	ft_draw_all_textures(&game, &game.tx);
 	mlx_key_hook(game.mlx, ft_key_hook, &game);
 	mlx_close_hook(game.mlx, ft_close_windows, &game);
 	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
+	clean_exit(&game, 0);
 	return (0);
 }

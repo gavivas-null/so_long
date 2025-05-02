@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:38:24 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/29 22:33:45 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:33:22 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	load_exit_sprites(t_game *game)
 {
-	game->exit.sprites[0] = ft_load_png(game->mlx, "textures/exit1.png");
-	game->exit.sprites[1] = ft_load_png(game->mlx, "textures/exit2.png");
+	game->exit.sprites[0] = ft_load_png(game, "textures/exit1.png");
+	game->exit.sprites[1] = ft_load_png(game, "textures/exit2.png");
 }
 
 void	disable_all_exit_sprites(t_game *game)

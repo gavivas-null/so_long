@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 17:09:07 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/24 18:36:00 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:33:46 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	load_enemy_sprites(t_game *game)
 {
-	game->enemy.sprites[0] = ft_load_png(game->mlx, "textures/enemy_f1.png");
-	game->enemy.sprites[2] = ft_load_png(game->mlx, "textures/enemy_l1.png");
-	game->enemy.sprites[1] = ft_load_png(game->mlx, "textures/enemy_b1.png");
-	game->enemy.sprites[3] = ft_load_png(game->mlx, "textures/enemy_r1.png");
+	game->enemy.sprites[0] = ft_load_png(game, "textures/enemy_f1.png");
+	game->enemy.sprites[2] = ft_load_png(game, "textures/enemy_l1.png");
+	game->enemy.sprites[1] = ft_load_png(game, "textures/enemy_b1.png");
+	game->enemy.sprites[3] = ft_load_png(game, "textures/enemy_r1.png");
 }
 
 void	disable_all_enemy_sprites(t_game *game)

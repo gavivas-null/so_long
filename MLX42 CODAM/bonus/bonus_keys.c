@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/29 22:18:38 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 19:10:48 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ void	draw_moves_bonus(t_game *game)
 
 	str = ft_itoa(game->moves);
 	new_str = ft_strjoin("Movimientos: ", str);
-	if (game->move_txt)
+	if (game->move_txt != NULL)
+	{
 		mlx_delete_image(game->mlx, game->move_txt);
+		game->move_txt = NULL;
+	}
 	game->move_txt = mlx_put_string(game->mlx, new_str, 5, 5);
 	free(str);
 	free(new_str);
@@ -34,7 +37,7 @@ void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.action != MLX_PRESS)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		mlx_close_window(game->mlx);
+		clean_exit(game, 0);
 	else if (keydata.key == MLX_KEY_W)
 	{
 		game->player.direction = 'W';

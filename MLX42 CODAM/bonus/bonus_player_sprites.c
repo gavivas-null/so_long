@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 19:23:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/24 18:34:35 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:32:09 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	load_player_sprites(t_game *game)
 {
-	game->player.right[0] = ft_load_png(game->mlx, "textures/player_r1.png");
-	game->player.right[1] = ft_load_png(game->mlx, "textures/player_r2.png");
-	game->player.right[2] = ft_load_png(game->mlx, "textures/player_r3.png");
-	game->player.left[0] = ft_load_png(game->mlx, "textures/player_l1.png");
-	game->player.left[1] = ft_load_png(game->mlx, "textures/player_l2.png");
-	game->player.left[2] = ft_load_png(game->mlx, "textures/player_l3.png");
-	game->player.front[0] = ft_load_png(game->mlx, "textures/player_f1.png");
-	game->player.front[1] = ft_load_png(game->mlx, "textures/player_f2.png");
-	game->player.front[2] = ft_load_png(game->mlx, "textures/player_f3.png");
-	game->player.back[0] = ft_load_png(game->mlx, "textures/player_b1.png");
-	game->player.back[1] = ft_load_png(game->mlx, "textures/player_b2.png");
-	game->player.back[2] = ft_load_png(game->mlx, "textures/player_b3.png");
+	game->player.right[0] = ft_load_png(game, "textures/player_r1.png");
+	game->player.right[1] = ft_load_png(game, "textures/player_r2.png");
+	game->player.right[2] = ft_load_png(game, "textures/player_r3.png");
+	game->player.left[0] = ft_load_png(game, "textures/player_l1.png");
+	game->player.left[1] = ft_load_png(game, "textures/player_l2.png");
+	game->player.left[2] = ft_load_png(game, "textures/player_l3.png");
+	game->player.front[0] = ft_load_png(game, "textures/player_f1.png");
+	game->player.front[1] = ft_load_png(game, "textures/player_f2.png");
+	game->player.front[2] = ft_load_png(game, "textures/player_f3.png");
+	game->player.back[0] = ft_load_png(game, "textures/player_b1.png");
+	game->player.back[1] = ft_load_png(game, "textures/player_b2.png");
+	game->player.back[2] = ft_load_png(game, "textures/player_b3.png");
 }
 
 void	disable_all_player_sprites(t_game *game)
