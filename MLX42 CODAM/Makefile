@@ -78,7 +78,7 @@ $(NAME_BONUS): $(OBJSBONUS)
 clean:
 	@rm -f $(OBJS) $(OBJSBONUS) $(OBJS_MAIN)
 	@$(MAKE) -C Libft clean > /dev/null
-	@$(MAKE) -C MLX42/build clean > /dev/null
+	-@$(MAKE) -C MLX42/build clean > /dev/null 2>&1 || true
 	@echo "🧹 Archivos objeto y temporales eliminados."
 
 fclean: clean
