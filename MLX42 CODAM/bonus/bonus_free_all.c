@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 23:06:22 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/05/02 19:19:38 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:39:22 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ void	clean_exit(t_game *game, int code)
 		mlx_close_window(game->mlx);
 		mlx_terminate(game->mlx);
 	}
-	ft_printf("Se limpió todo\n");
 	exit(code);
 }

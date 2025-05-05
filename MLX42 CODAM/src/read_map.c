@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 22:41:02 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/04/22 22:15:00 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:51:09 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_get_map_size(t_game *game)
 {
-	if (!game->map)
+	if (!game->map || !game->map[0])
 	{
 		game->width = 0;
 		game->height = 0;
@@ -26,7 +26,7 @@ void	ft_get_map_size(t_game *game)
 		game->height++;
 }
 
-char	**ft_lst_2_array(t_list *list)
+char	**ft_lst_to_array(t_list *list)
 {
 	int		size;
 	int		i;
@@ -71,7 +71,7 @@ char	**ft_read_map(char *filename)
 	}
 	free(line);
 	close(fd);
-	map = ft_lst_2_array(map_list);
+	map = ft_lst_to_array(map_list);
 	return (ft_lstclear(&map_list, free), map);
 }
 
