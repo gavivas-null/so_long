@@ -6,7 +6,7 @@
 /*   By: gavivas- <gavivas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:12:38 by gavivas-          #+#    #+#             */
-/*   Updated: 2025/05/02 18:28:33 by gavivas-         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:19:34 by gavivas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_move_player(t_game *game, int new_x, int new_y)
 	game->tx.player->instances[0].x = new_x * TILE;
 	game->tx.player->instances[0].y = new_y * TILE;
 	game->moves++;
+	ft_printf("Movimientos: %i\n", game->moves);
 	if ((game->map[new_y][new_x] == 'E')
 		&& (game->point == game->total_collectibles))
 	{
